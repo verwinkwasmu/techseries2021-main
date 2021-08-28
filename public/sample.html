@@ -44,9 +44,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="userindex.html">Home</a></li>
-          <li><a class="nav-link scrollto" href="academy.html">Academy</a></li>
-          <li><a class="nav-link scrollto" href="profile.html">Earnings</a></li>
+          <li><a class="nav-link scrollto active">Home</a></li>
+          <li><a class="nav-link scrollto active">Academy</a></li>
+          <li><a class="nav-link scrollto active">Earnings</a></li>
         
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -77,8 +77,8 @@
         <div class="container" data-aos="fade-up">
   
           <div class="section-title">
-            <h2>Gogoacademy</h2>
-            <p>Budgeting</p>
+            <h2 id="storeID">Gogoacademy</h2>
+            <p id="eduID">Budgeting</p>
           </div>
   
  <!-- start of sample lesson  -->
@@ -138,7 +138,7 @@
                 track of their finances and allocating money in the best way.
               </p>
               <div>
-                <a href="quiz.html" class="btn-get-started scrollto">Proceed to Quiz >></a>
+                <a onclick="completeCourse()" class="btn btn-warning btn-lg scrollto">Complete Course</a>
               </div>
               </div>
             </div>
@@ -148,14 +148,6 @@
       </section>
 
 <!-- end of sample lesson -->
-          
-        
-           
-            
-    
-
-
-    
     
   </main><!-- End #main -->
 
@@ -174,7 +166,6 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
@@ -182,7 +173,54 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="/public/assets/js/main.js"></script>
+  <script src="/assets/js/main.js"></script>  
+  <script>
+
+    // Get company name and store Business ID in html with element with id = 'storeID'
+    $(document).ready(function () {
+      fetch("https://3iqkvxl23h.execute-api.us-east-1.amazonaws.com/dev", {
+          method: 'get'
+      }).then(response => response.json()).then(function (data) {
+        const business = data.Items[0]
+        document.getElementById("storeID").name = business.smallbizID;
+      }).catch(function (error) {
+          console.log(error)
+      })
+
+      fetch("https://ddf21mgpq5.execute-api.us-east-1.amazonaws.com/dev", {
+          method: 'get'
+      }).then(response => response.json()).then(function (data) {
+        const edu = data.Items[0]
+        document.getElementById("eduID").name = edu.eduID;
+      }).catch(function (error) {
+          console.log(error)
+      })
+    })
+
+    async function completeCourse(){
+      let json_file = {
+          "smallBizID": document.getElementById("storeID").name,
+          "eduID": document.getElementById("eduID").name
+      }
+      try {
+          const response = await fetch('https://h5x3k0lcte.execute-api.us-east-1.amazonaws.com/dev', {
+              method: 'POST',
+              headers: { "Content-Type": "application/json" }, body: JSON.stringify(json_file)
+          });
+          const result = await response.json()
+          console.log(result)
+          if (result) {
+              alert("Course Complete!")
+              window.location.href = "usernormal.html"
+          } else {
+              alert("Error unable to complete course. Please try again later")
+          }
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+  </script>
 
 </body>
 
