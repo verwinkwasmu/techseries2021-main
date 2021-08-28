@@ -665,6 +665,10 @@ section {
   z-index: 1;
 }
 
+.portfolio .portfolio-wrap-1 img {
+  background-color: #fff;
+}
+
 .portfolio .portfolio-wrap .portfolio-links {
   opacity: 0;
   left: 0;
@@ -1343,3 +1347,9 @@ section {
     padding: 3px 0;
   }
 }
+
+/* shading for academy */
+#shade {
+  background: rgba(0,0,0,3.0);
+}
+
