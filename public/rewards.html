@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon">
-    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="./assets/img/favicon.png" rel="icon">
+    <link href="./assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -19,18 +19,17 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="./assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="./assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="./assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="./assets/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="../qrcode.min.js"></script>
+    <script src="./qrcode.min.js"></script>
 </head>
 
 <body>
@@ -70,7 +69,7 @@
             </ul>
           </li> -->
                     <li><a href="">Rewards</a></li>
-                    <li><a class="getstarted scrollto" href="shopindex.html">Get Started</a></li>
+                    <li><a class="getstarted scrollto" onclick="logout()">Log Out</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -190,7 +189,6 @@
                 </div>
                 <div id="display" class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-
                     <div class="col-lg-4 col-md-6 portfolio-item filter-app">
                         <div class="portfolio-wrap">
                             <img src="assets/img/portfolio/grab.jpeg" class="img-fluid" alt="">
@@ -205,6 +203,7 @@
                             </div>
                         </div>
                     </div>
+                    
 
                 </div>
 
@@ -320,32 +319,32 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="/public/assets/vendor/aos/aos.js"></script>
-    <script src="/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/public/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="/public/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="/public/assets/vendor/php-email-form/validate.js"></script>
-    <script src="/public/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="./assets/vendor/php-email-form/validate.js"></script>
+    <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="/public/assets/js/main.js"></script>
+    <script src="./assets/js/main.js"></script>
     <script>
         // Get USERID 
-        const userID = {
-            "userID": "user-01"
+        const userID = localStorage.getItem('userID')
+        let userInputs = {
+            "userID" : userID
         }
-        const userIDD = "user-01"
-
+        
         $(document).ready(function () {
-
+            
             // Calling getUser API
             fetch("https://htlvlmizk5.execute-api.us-east-1.amazonaws.com/dev", {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(userID)
+                body: JSON.stringify(userInputs)
             }).then(response => response.json()).then(function (data) {
+                console.log(data)
                 const coins = data.Items[0].coins
                 $("#userCoins").text(`You have ${coins} coins!`)
             }).catch(function (error) {
@@ -358,7 +357,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(userID)
+                body: JSON.stringify(userInputs)
             }).then(response => response.json()).then(function (data) {
                 const rewards = data.Count
                 $("#userRewards").text(`You have claimed ${rewards} rewards!`)
@@ -374,12 +373,7 @@
                     $('#display').append(`<div class="col-lg-4 col-md-6 portfolio-item filter-app">
                                             <div class="portfolio-wrap">
                                                 <img src=${voucher.imgSrc} class="img-fluid" alt="">
-                                                <div class="portfolio-links">
-                                                    <a href="${voucher.imgSrc}" data-gallery="portfolioGallery"
-                                                        class="portfolio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                                                    <a href="" title="More Details"><i class="bi bi-link"></i></a>
-                                                </div>
-                                                <div class="portfolio-info">
+                                                <div class="portfolio-info p-5">
                                                     <h4 id="voucherName-${voucher.voucherID}">${voucher.voucherName}</h4>
                                                     <p id="voucherBrand-${voucher.voucherID}">${voucher.voucherBrand}</p>
                                                     <p><span id="costPrice-${voucher.voucherID}">${voucher.costPrice}</span> Coins!</p>
@@ -405,7 +399,7 @@
             let costPrice = $(`#costPrice-${ID}`).text()
 
             let json_file = {
-                "userID": userIDD,
+                "userID": userID,
                 "voucherID": voucherID,
                 "voucherName": voucherName,
                 "costPrice": parseInt(costPrice),
@@ -445,7 +439,7 @@
         async function updateCoins(costPrice){
 
             let json_file = {
-                "userID": userIDD,
+                "userID": userID,
                 "addOrMinus": "minus",
                 "amount": parseInt(costPrice),
             }
@@ -466,6 +460,11 @@
             } catch (err) {
                 console.log(err)
             }
+        }
+
+        function logout(){
+            localStorage.clear()
+            window.location.href = "./index.html"
         }
     </script>
 </body>
