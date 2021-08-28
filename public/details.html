@@ -20,7 +20,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
   
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -29,7 +28,9 @@
   
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
-  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../qrcode.min.js"></script>
   </head>
 
 <body>
@@ -84,7 +85,8 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Ah Hock Kopitiam</h2>
+          <span id='storeID'></span>
+          <h2 id='companyName1'></h2>
           <ol>
             
           </ol>
@@ -120,19 +122,31 @@
 
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3>Ah Hock Kopitiam - Sample name</h3>
+              <h3 id="companyName2"></h3>
               <ul>
                 <li><strong>Location</strong>: Hougang Avenue 8, #01-222</li>
             
               </ul>
             </div>
             <div class="portfolio-description">
-              <h2>Ah Hock Kopitiam</h2>
+              <h2 id="companyName3">Ah Hock Kopitiam</h2>
               <p>
                 Established in 1999, it is owned by uncle Hock as a way to make ends meet.
                 To support a family of 5, he currently sells fishes below $20.
               </p>
-              <button>Contribute Here!</button>
+              <p>
+                Support small businesses like these by indicating your contribution amount below!
+              </p>
+              <div class="footer-newsletter">
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                    $<input id="amount" type="number" name="Contribution Amount" value="10">
+                    <button class="btn btn-light mt-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="contribute()">Contribute</button>  
+                    </div>
+                  </div>
+                </div>
+              </div>  
             </div>
           </div>
 
@@ -140,7 +154,6 @@
 
       </div>
     </section><!-- End Portfolio Details Section -->
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -175,12 +188,29 @@
        
       </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Scan the QR Code to transfer $<span id='contribution'></span> to <span id='companyName4'></span>!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body mx-auto">
+                  <div id="qrcode">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+    </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
@@ -188,8 +218,105 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="/assets/js/main.js"></script>  
+  <script>
+    // Get USERID 
+    const userID = {
+        "userID": "user-01"
+    }
+    const userIDD = "user-01"
 
+    // Get company name
+    $(document).ready(function () {
+      fetch("https://3iqkvxl23h.execute-api.us-east-1.amazonaws.com/dev", {
+          method: 'get'
+      }).then(response => response.json()).then(function (data) {
+        const business = data.Items[0]
+        var smallbizID = business.smallbizID
+        document.getElementById("companyName1").innerHTML = business.companyName;
+        document.getElementById("companyName2").innerHTML = business.companyName;
+        document.getElementById("companyName3").innerHTML = business.companyName;
+        document.getElementById("companyName4").innerHTML = business.companyName;
+        document.getElementById("storeID").name = business.smallbizID;
+      }).catch(function (error) {
+          console.log(error)
+      })
+    })
+
+    function contribute(){
+      // Get amount of contribution
+      amount = document.getElementById("amount").value;
+      document.getElementById("contribution").innerHTML = amount;
+      //put URL for QR code here
+      generateQRCode('www.google.com')
+      //update contribution to business
+      addContribution(amount)
+      //update coins of contributor
+      updateCoins(amount)
+    }
+
+    function generateQRCode(ID){
+            $('#qrcode').empty()
+            let qrcode = new QRCode(document.getElementById('qrcode'))
+            qrcode.makeCode(ID) 
+
+            $('#qrcode').click(function() {
+                updateCoins(amount)
+            })
+    }
+    
+    async function updateCoins(amount){
+
+      let json_file = {
+          "userID": userIDD,
+          "amount": parseInt(amount),
+          "addOrMinus": "add"
+      }
+      try {
+          const response = await fetch('https://kkanrk8ag7.execute-api.us-east-1.amazonaws.com/dev', {
+              method: 'PUT',
+              headers: { "Content-Type": "application/json" }, body: JSON.stringify(json_file)
+          });
+          const result = await response.json()
+          console.log(result)
+          if (result) {
+              alert("Thank You for Contributing!")
+              
+          } else {
+              alert("Error unable to update coins. Please try again later")
+          }
+
+      } catch (err) {
+          console.log(err)
+      }
+    }
+
+    async function addContribution(amount){
+
+      let json_file = {
+          "userID": userIDD,
+          "smallBizID": document.getElementById("storeID").name,
+          "amount": parseInt(amount),
+      }
+      try {
+          const response = await fetch('https://1t6d8gulag.execute-api.us-east-1.amazonaws.com/dev', {
+              method: 'POST',
+              headers: { "Content-Type": "application/json" }, body: JSON.stringify(json_file)
+          });
+          const result = await response.json()
+          console.log(result)
+          if (result) {
+              alert("Thank You for Contributing!")
+              
+          } else {
+              alert("Error unable to contribute. Please try again later")
+          }
+
+      } catch (err) {
+          console.log(err)
+      }
+    }
+  </script>
 </body>
 
 </html>
