@@ -26,7 +26,13 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
-
+  <style>
+    .completed {
+      line-height: 1 !important;
+      border-radius: 0px !important;
+      width: 105px !important;
+    }
+  </style>
  
 </head>
 
@@ -99,7 +105,7 @@
                 <img src="assets/img/lesson.jpg" class="img-fluid" alt="">
                 <div class="portfolio-links">
                   <!-- <a href="assets/img/portfolio/wetmarket.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bi bi-plus"></i></a> -->
-                  <a href="sample.html" title=""><i class="bi bi-link"></i></a>
+                  <a href="sample.html" title="" class="completed">Completed</a>
                 </div>
                 <div class="portfolio-info">
                   <h4></h4>
@@ -173,7 +179,29 @@
 
   <!-- Template Main JS File -->
   <script src="/public/assets/js/main.js"></script>
-
+  <script>
+    const userID = {
+        "smallBizID": "b2"
+    }
+    const smallBizID = "b2"
+    
+    // Get completed courses
+    $(document).ready(function () {
+      fetch("https://wyufidgdsd.execute-api.us-east-1.amazonaws.com/dev", {
+          method: 'get'
+      }).then(response => response.json()).then(function (data) {
+        const business = data.Items[0]
+        var smallbizID = business.smallbizID
+        document.getElementById("companyName1").innerHTML = business.companyName;
+        document.getElementById("companyName2").innerHTML = business.companyName;
+        document.getElementById("companyName3").innerHTML = business.companyName;
+        document.getElementById("companyName4").innerHTML = business.companyName;
+        document.getElementById("storeID").name = business.smallbizID;
+      }).catch(function (error) {
+          console.log(error)
+      })
+    })
+  </script>
 </body>
 
 </html>
