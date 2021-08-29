@@ -72,7 +72,7 @@
             </ul>
           </li> -->
           <li><a href="rewards.html">Rewards</a></li>
-          <li><a class="getstarted scrollto" href="shopindex.html">Get Started</a></li>
+          <li><a class="getstarted scrollto" onclick="logout()">Log Out</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -317,7 +317,7 @@
 
       let json_file = {
         "userID": userID,
-        "smallBizID": document.getElementById("storeID").name,
+        "smallBizID": "b1",
         "amount": parseInt(amount),
       }
       try {
@@ -326,10 +326,11 @@
           headers: { "Content-Type": "application/json" }, body: JSON.stringify(json_file)
         });
         const result = await response.json()
-        
+        console.log(result)
         if (result) {
           
           sendSNS('96891917', message)
+          location.reload()
         } else {
           alert("Error unable to contribute. Please try again later")
         }
@@ -364,6 +365,11 @@
         console.log(err)
       }
 
+    }
+
+    function logout(){
+            localStorage.clear()
+            window.location.href = "./index.html"
     }
   </script>
 </body>
