@@ -25,6 +25,7 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -38,7 +39,7 @@
 
 </head>
 
-<body>
+<body onload="loadEducation()">
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
@@ -57,6 +58,7 @@
           <li><a class="nav-link scrollto" href="earnings.html">Earnings</a></li>
           <li><a class="getstarted scrollto" onclick="logout()">Log Out</a></li>
         
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -87,7 +89,7 @@
 
         <div class="section-title">
           <h2>Gogoacademy</h2>
-          <p>What would you like to learn today?</p>
+          <p id='test'>What would you like to learn today?</p>
         </div>
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -101,56 +103,9 @@
           </div>
         </div>
 
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+        <div id="courseContainer" class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="assets/img/lesson.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <!-- <a href="assets/img/portfolio/wetmarket.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bi bi-plus"></i></a> -->
-                <a href="sample.html" title="" class="completed">Completed</a>
-              </div>
-              <div class="portfolio-info">
-                <h4></h4>
-                <p></p>
-              </div>
-
-            </div>
-            <h4>1. Budgeting</h4>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-            <div class="portfolio-wrap">
-              <img src="assets/img/calculator.jpg" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <!-- <a href="assets/img/portfolio/wetmkt2.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bi bi-plus"></i></a> -->
-                <a href="sample.html" title=""><i class="bi bi-link"></i></a>
-              </div>
-              <div class="portfolio-info">
-                <h4></h4>
-                <p></p>
-              </div>
-            </div>
-            <h4>2.Pricing Products</h4>
-          </div>
-          <!-- For courses that are done sample -->
-          <div class="col-lg-4 col-md-6">
-            <div class="portfolio-wrap">
-              <img src="assets/img/ppl.jpg" class="img-fluid" alt="" id="shade">
-              <div class="portfolio-links">
-                <!-- <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bi bi-plus"></i></a> -->
-                <a href="sample.html" title="">Review</a>
-              </div>
-              <div class="portfolio-info">
-                <h4></h4>
-                <p></p>
-              </div>
-            </div>
-            <h4>3. Managing Customers</h4>
-          </div>
-
-
-
+          
 
 
 
@@ -184,27 +139,87 @@
   <!-- Template Main JS File -->
   <script src="/public/assets/js/main.js"></script>
   <script>
-    const userID = {
-      "smallBizID": "b2"
+    // const userID = {
+    //   "smallBizID": "b2"
+    // }
+    // const smallBizID = "b2"
+
+    // Get all education course information
+    function loadEducation() {
+      fetch("https://ddf21mgpq5.execute-api.us-east-1.amazonaws.com/dev", {
+        method: 'post'
+      })
+      .then(response => response.json())
+      .then(data =>  {
+        // console.log(data);
+        var courseObjects = data.Items;
+        courseObjects.sort((a,b) => (a.eduID < b.eduID) ? -1:1);
+        // console.log(courseObjects)
+        var html_str = '';
+
+        for (var course of courseObjects) {
+          html_str += `
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app" id="eduID ${course.eduID}">
+            <div class="portfolio-wrap">
+              <img src="${course.courseImage}" class="img-fluid" alt="">
+              <div class="portfolio-links">
+                <a href="sample.html" title=""><i class="bi bi-link"></i></a>
+              </div>
+              <div class="portfolio-info">
+                <h4></h4>
+                <p></p>
+              </div>
+
+            </div>
+            <h4>${course.courseName}</h4>
+            
+          </div>`;
+        }
+        
+        document.getElementById("courseContainer").innerHTML = html_str;
+        getCompletedCourses()
+      })
+      .catch(function(error) {
+        alert("Error in loading education modules. Please refresh!")
+      })
+      
     }
-    const smallBizID = "b2"
 
     // Get completed courses
-    $(document).ready(function () {
+    const getCompletedCourses = () => {
+      let smallBizID = localStorage.getItem("userID");
+      // let smallBizID = "b1";
+
+      let json_file = {
+        "smallBizID": smallBizID
+      }
       fetch("https://wyufidgdsd.execute-api.us-east-1.amazonaws.com/dev", {
-        method: 'get'
-      }).then(response => response.json()).then(function (data) {
-        const business = data.Items[0]
-        var smallbizID = business.smallbizID
-        document.getElementById("companyName1").innerHTML = business.companyName;
-        document.getElementById("companyName2").innerHTML = business.companyName;
-        document.getElementById("companyName3").innerHTML = business.companyName;
-        document.getElementById("companyName4").innerHTML = business.companyName;
-        document.getElementById("storeID").name = business.smallbizID;
-      }).catch(function (error) {
+        method: 'post',
+        header: { "Content-Type": "application/json" },
+        body: JSON.stringify(json_file)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        let completedCourses = data.Items;
+        for (let completedCourse of completedCourses) {
+          let completedEduID = completedCourse.eduID;
+          var text = "Completed!";
+
+          var span = document.createElement("span");
+          var node = document.createTextNode(text); 
+          span.appendChild(node);
+          span.innerHTML += " <span> &#9989;</span>";
+
+          let divID = `eduID ${completedEduID}`;
+          document.getElementById(divID).appendChild(span);
+        }
+      })
+      .catch(function (error) {
         console.log(error)
       })
-    })
+    } 
+    
 
     function logout() {
       localStorage.clear()
