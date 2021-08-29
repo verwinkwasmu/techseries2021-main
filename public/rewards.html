@@ -106,20 +106,7 @@
                 </div>
                 <div id="display" class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-                    <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                        <div class="portfolio-wrap">
-                            <img src="assets/img/portfolio/grab.jpeg" class="img-fluid" alt="">
-                            <div class="portfolio-links">
-                                <a href="assets/img/portfolio/sb.jpeg" data-gallery="portfolioGallery"
-                                    class="portfolio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                                <a href="" title="More Details"><i class="bi bi-link"></i></a>
-                            </div>
-                            <div class="portfolio-info">
-                                <h4>$10 Voucher</h4>
-                                <p>Starbucks</p>
-                            </div>
-                        </div>
-                    </div>
+                    
                     
 
                 </div>
@@ -135,60 +122,28 @@
 
 
     </main><!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer">
-
-        <div class="footer-newsletter">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <h4>Join Our Newsletter</h4>
-                        <p>Stay tuned for more small businesses to support.</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
+    <br>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Scan the QR Code to Redeem your Voucher!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
+            <div class="modal-body mx-auto">
+                <div id="qrcode">
 
                 </div>
             </div>
-        </div>
-
-        <div class="container py-4">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Gogo</span></strong>. All Rights Reserved
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Scan the QR Code to Redeem your Voucher!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body mx-auto">
-                        <div id="qrcode">
-
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer><!-- End Footer -->
-
+    </div>
+</div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
