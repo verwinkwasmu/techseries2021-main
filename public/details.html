@@ -88,7 +88,7 @@
 
         <div class="d-flex justify-content-between align-items-center">
           <span id='storeID'></span>
-          <h2 id='companyName1'></h2>
+          <h1 id='companyName1'>Ah Hock Kopitiam</h1>
           <ol>
 
           </ol>
@@ -124,7 +124,7 @@
 
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3 id="companyName2"></h3>
+              <h3 id="companyName2">Ah Hock Kopitiam</h3>
               <ul>
                 <li><strong>Location</strong>: Hougang Avenue 8, #01-222</li>
 
@@ -143,7 +143,14 @@
                 <div class="container">
                   <div class="row justify-content-center">
                     <div class="col-lg-6">
-                      <input type="number" class="form-control" value=10 id="amount">
+
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">$</span>
+                          </div>
+                          <input type="number" class="form-control" value=10 id="amount" aria-describedby="basic-addon1">
+                        </div>
+                      
 
                       <button class="btn btn-light mt-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                         onclick="contribute()">Contribute</button>
@@ -229,11 +236,7 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Template Main JS File -->
-<<<<<<< Updated upstream
-  <script src="/assets/js/main.js"></script>
-=======
   <script src="assets/js/main.js"></script>  
->>>>>>> Stashed changes
   <script>
     // Get USERID 
     const userID = localStorage.getItem('userID')
@@ -243,21 +246,21 @@
       "userID": userID
     }
     // Get company name
-    $(document).ready(function () {
-      fetch("https://3iqkvxl23h.execute-api.us-east-1.amazonaws.com/dev", {
-        method: 'get'
-      }).then(response => response.json()).then(function (data) {
-        const business = data.Items[0]
-        var smallbizID = business.smallbizID
-        document.getElementById("companyName1").innerHTML = business.companyName;
-        document.getElementById("companyName2").innerHTML = business.companyName;
-        document.getElementById("companyName3").innerHTML = business.companyName;
-        document.getElementById("companyName4").innerHTML = business.companyName;
-        document.getElementById("storeID").name = business.smallbizID;
-      }).catch(function (error) {
-        console.log(error)
-      })
-    })
+    // $(document).ready(function () {
+    //   fetch("https://3iqkvxl23h.execute-api.us-east-1.amazonaws.com/dev", {
+    //     method: 'get'
+    //   }).then(response => response.json()).then(function (data) {
+    //     const business = data.Items[0]
+    //     var smallbizID = business.smallbizID
+    //     document.getElementById("companyName1").innerHTML = business.companyName;
+    //     document.getElementById("companyName2").innerHTML = business.companyName;
+    //     document.getElementById("companyName3").innerHTML = business.companyName;
+    //     document.getElementById("companyName4").innerHTML = business.companyName;
+    //     document.getElementById("storeID").name = business.smallbizID;
+    //   }).catch(function (error) {
+    //     console.log(error)
+    //   })
+    // })
 
     function contribute() {
       // Get amount of contribution
