@@ -47,6 +47,7 @@
           <li><a class="nav-link scrollto active" href="userindex.html">Home</a></li>
           <li><a class="nav-link scrollto" href="userindex.html">Academy</a></li>
           <li><a class="nav-link scrollto" href="userindex.html">Earnings</a></li>
+          <li><a class="getstarted scrollto" onclick="logout()">Log Out</a></li>
         
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -106,6 +107,13 @@
 
   <!-- Template Main JS File -->
   <script src="./assets/js/main.js"></script>
+
+  <script>
+    function logout() {
+      localStorage.clear()
+      window.location.href = "./index.html"
+    }
+  </script>
 
 </body>
 
