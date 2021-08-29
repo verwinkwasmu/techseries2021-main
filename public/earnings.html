@@ -14,10 +14,11 @@
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -27,13 +28,13 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
- <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <!-- jquery script -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-        crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <!-- jquery script -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+    crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -69,79 +70,54 @@
   <main id="main">
     <section id="hero" class="d-flex align-items-center">
 
-        <div class="container">
-          <div class="row gy-4">
-            <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-              <h1>Your profile at a glance...</h1>
-              <h2>You received a total of *var* contributions today</h2>
-              <h2>You received a total of *var* contributions this month</h2>
-            </div>
-            <div class="col-lg-6 order-1 order-lg-2 hero-img">
-              <img src="assets/img/browsing.png" class="img-fluid animated" alt="">
-            </div>
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+            <h1>Your profile at a glance...</h1>
+            <h2 id="todayContribution"></h2>
+            <h2 id="totalContribution"></h2>
           </div>
-        </div> 
+          <div class="col-lg-6 order-1 order-lg-2 hero-img">
+            <img src="assets/img/browsing.png" class="img-fluid animated" alt="">
+          </div>
+        </div>
+      </div>
 
-    
+
   </main><!-- End #main -->
-<section>
-<br>
-<div class = "container py-4">
-<h3 class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">Contribution History</h3>
-<table class="table table-striped" padding="">
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Time</th>
-        <th scope="col">CustUser</th>
-        <th scope="col">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">XXX</th>
-        <td>XXX</td>
-        <td>XXX</td>
-        <td>XXX</td>
-      </tr>
-      <tr>
-        <th scope="row">XXX</th>
-        <td>XXX</td>
-        <td>XXX</td>
-        <td>XXX</td>
-      </tr>
-      <tr>
-        <th scope="row">XXX</th>
-        <td>XXX</td>
-        <td>XXX</td>
-        <td>XXX</td>
-      </tr>
-      <tr>
-        <th scope="row">XXX</th>
-        <td>XXX</td>
-        <td>XXX</td>
-        <td>XXX</td>
-      </tr>
-      
-    </tbody>
-  </table>
-</div>
-</section>
-  <!-- ======= Footer ======= -->
- 
+  <section>
+    <br>
     <div class="container py-4">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Gogo</span></strong>. All Rights Reserved
-      </div>
-
-      </div>
+      <h3 class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">Contribution History</h3>
+      <table class="table table-striped" padding="">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Customer User</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody id="display">
+        </tbody>
+      </table>
     </div>
+  </section>
+  <!-- ======= Footer ======= -->
+
+  <div class="container py-4">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Gogo</span></strong>. All Rights Reserved
+    </div>
+
+  </div>
+  </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
@@ -154,6 +130,66 @@
     function logout() {
       localStorage.clear()
       window.location.href = "./index.html"
+    }
+  </script>
+  <script>
+    const userID = localStorage.getItem('userID')
+    let userInputs = {
+      "smallBizID": userID
+    }
+    $(document).ready(function () {
+      // Calling getRewards API
+      fetch("https://90p3dqmv7i.execute-api.us-east-1.amazonaws.com/dev", {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userInputs)
+      }).then(response => response.json()).then(function (data) {
+        
+        let totalContributions = 0
+        let todaysContributions = 0
+
+        for (let contributions of data.Items) {
+          totalContributions += contributions.amount
+          
+          let timestamp = contributions.timestamp.split(" ")
+          let date = timestamp[0]
+          let time = timestamp[1]
+
+          let todayDate = new Date(changeToDateOrder(date))
+
+          if (isToday(todayDate)) {
+            todaysContributions += contributions.amount
+          }
+          $('#display').append(`<tr>
+                                  <th scope="row">${date}</th>
+                                  <td>${time}</td>
+                                  <td>${contributions.userID}</td>
+                                  <td>$${contributions.amount}</td>
+                                </tr>`)
+        }
+        $('#todayContribution').text(`You received a total of $${todaysContributions} contributions today`)
+        $('#totalContribution').text(`You received a total of $${totalContributions} contributions this month`)
+      }).catch(function (error) {
+        console.log(error)
+      })
+    })
+
+    const isToday = (someDate) => {
+      const today = new Date()
+      return someDate.getDate() == today.getDate() &&
+        someDate.getMonth() == today.getMonth() &&
+        someDate.getFullYear() == today.getFullYear()
+    }
+
+    function changeToDateOrder(date) {
+      // 29/08/2021
+      let day = date.split('/')[0]
+      let month = date.split('/')[1]
+      let year = date.split('/')[2]
+
+      return `${year}/${month}/${day}`
     }
   </script>
 </body>
