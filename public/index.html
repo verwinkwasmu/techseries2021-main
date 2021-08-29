@@ -78,7 +78,7 @@
         })
         const result = await response.json()
         console.log(result)
-        if (result.ResponseMetadata.HTTPStatusCode == 200){
+        if (result.ResponseMetadata.HTTPStatusCode == 200) {
           let userID = result.Items[0].userID
           let userName = result.Items[0].userName
           populateStorage("userID",userID)
@@ -90,11 +90,11 @@
           else{
             window.location.href = "./userindex.html" 
           }
-        }
-        else{
-          alert("error in logging in please try again!")
+        } else {
+          alert("Wrong credentials, please try again!")
         }
       }catch(err){
+        alert("Wrong credentials, please try again!")
         console.log(err)
       }
     }
