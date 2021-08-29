@@ -99,7 +99,7 @@
             body: JSON.stringify(json_file)
           })
           const result = await response.json()
-          console.log(result)
+
           if (result[0].ResponseMetadata.HTTPStatusCode == 200) {
             let json_file = {
               "email": email,
@@ -128,22 +128,25 @@
                 console.log(err)
               }
             }
-            else{
+            else {
               alert("Hi Small Business Owner, your Registration Successful, Please Login!")
-                  window.location.href = "./index.html"
+              window.location.href = "./index.html"
             }
 
-          } else {
-            alert("Wrong credentials, please try again!")
+          }
+          else if (result == "user is already registered!") {
+            alert("User Already Registered!")
+          }else{
+            alert("Registration Failed, please try again!")
           }
         } catch (err) {
-          alert("Wrong credentials, please try again!")
-          console.log(err)
-        }
+        alert("Wrong credentials, please try again!")
+        console.log(err)
       }
+    }
       else {
-        alert("Please fill in the same password")
-      }
+      alert("Please fill in the same password")
+    }
 
 
     }
