@@ -50,9 +50,10 @@
                   placeholder="Reenter a Password">
               </div>
               <div class="form group mb-4">
-                <select id="userType" class="form-select form-control">
-                  <option>CrowdFunder</option>
-                  <option>Small Business</option>
+                <select id="userType" class="form-select form-control" placeholder="Please Select the User Type">
+                  <option selected>Please Select User Type</option>
+                  <option value="CrowdFunder">CrowdFunder</option>
+                  <option value="Small Business">Small Business</option>
                 </select>
               </div>
               <button id="register" class="btn btn-block login-btn mb-4" onclick="register()">Register</button>

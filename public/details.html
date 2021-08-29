@@ -88,7 +88,7 @@
 
         <div class="d-flex justify-content-between align-items-center">
           <span id='storeID'></span>
-          <h2 id='companyName1'></h2>
+          <h1 id='companyName1'>Ah Hock Kopitiam</h1>
           <ol>
 
           </ol>
@@ -124,7 +124,7 @@
 
           <div class="col-lg-4">
             <div class="portfolio-info">
-              <h3 id="companyName2"></h3>
+              <h3 id="companyName2">Ah Hock Kopitiam</h3>
               <ul>
                 <li><strong>Location</strong>: Hougang Avenue 8, #01-222</li>
 
@@ -246,21 +246,21 @@
       "userID": userID
     }
     // Get company name
-    $(document).ready(function () {
-      fetch("https://3iqkvxl23h.execute-api.us-east-1.amazonaws.com/dev", {
-        method: 'get'
-      }).then(response => response.json()).then(function (data) {
-        const business = data.Items[0]
-        var smallbizID = business.smallbizID
-        document.getElementById("companyName1").innerHTML = business.companyName;
-        document.getElementById("companyName2").innerHTML = business.companyName;
-        document.getElementById("companyName3").innerHTML = business.companyName;
-        document.getElementById("companyName4").innerHTML = business.companyName;
-        document.getElementById("storeID").name = business.smallbizID;
-      }).catch(function (error) {
-        console.log(error)
-      })
-    })
+    // $(document).ready(function () {
+    //   fetch("https://3iqkvxl23h.execute-api.us-east-1.amazonaws.com/dev", {
+    //     method: 'get'
+    //   }).then(response => response.json()).then(function (data) {
+    //     const business = data.Items[0]
+    //     var smallbizID = business.smallbizID
+    //     document.getElementById("companyName1").innerHTML = business.companyName;
+    //     document.getElementById("companyName2").innerHTML = business.companyName;
+    //     document.getElementById("companyName3").innerHTML = business.companyName;
+    //     document.getElementById("companyName4").innerHTML = business.companyName;
+    //     document.getElementById("storeID").name = business.smallbizID;
+    //   }).catch(function (error) {
+    //     console.log(error)
+    //   })
+    // })
 
     function contribute() {
       // Get amount of contribution
