@@ -28,6 +28,68 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
   <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+
+  <!-- Try out for Google translate -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+  
+    <script type="text/javascript">
+      
+      var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://google-translate1.p.rapidapi.com/language/translate/v2",
+      "method": "POST",
+      "headers": {
+        "x-rapidapi-host": "google-translate1.p.rapidapi.com",
+        "x-rapidapi-key": "f0a518fc42msh57b9230f5371d27p1b7ef1jsnfe85f5cd373a",
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      "data": {
+        "source": "en",
+        "q": "Contact Form | Name | Contact Number | Email",
+        "target": ""
+      }
+      
+    }
+    $(document).ready(function(){
+        $(".dropdown-item").click(function(e){
+          if($(this).attr("tolang") != 'en'){
+            settings.data.target = $(this).attr("tolang");
+            
+            fetchTranslation();
+            $('button').html($(this).html());
+          } else {
+            updatePlaceholders(settings.data.q);
+            $('#langSel').html("Translate to");
+          }  
+        });
+    });
+    function fetchTranslation(){
+      $.ajax(settings).done(function (response) {
+        
+        console.log(response);
+        var translatedText = response.data.translations[0].translatedText;
+        
+        updatePlaceholders(translatedText);
+        
+      });
+    }
+    function updatePlaceholders(updateString){
+      var comp = updateString.split('|')
+      $('form > input').each(function(idx){
+        $(this).prop("placeholder", comp[idx+1].trim() );
+      });
+      $("#formHeading").html(comp[0]);
+    }
+    </script>
+  
 </head>
 
 <body>
@@ -86,12 +148,47 @@
 
   <main id="main">
 
-    <!-- ======= Sample Lesson ======= -->
+    <!-- Test -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          
+        </div>
+        <div class="col-sm">
+            <div class="btn-group dropright translate">
+          <button id="langSel" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Translate to
+          </button>
+          <div class="dropdown-menu translate-option">
+            <a class="dropdown-item" href="#" tolang="en">English (default)</a>
+            <a class="dropdown-item" href="#" tolang="it">Italian</a>
+            <a class="dropdown-item" href="#" tolang="es">Spanish</a>
+            <a class="dropdown-item" href="#" tolang="de">German</a>
+            <a class="dropdown-item" href="#" tolang="zh">Chinese</a>
+          </div>
+        </div>
+        <h1 id="formHeading">
+            Contact Form
+        </h1>
+        <div>
+          <form action="">
+            <input type="text" name="name" class="formStyle" placeholder="Name" required />
+            <input type="text" name="email" class="formStyle" placeholder="Contact No." required />
+            <input type="email" name="email" class="formStyle" placeholder="Email" required />
+          </form>
+        </div>
+        </div>
+        <div class="col-sm">
+          
+        </div>
+      </div>
+    </div>
+    <!-- End Test -->
 
-      
+    <!-- ======= Sample Lesson ======= -->
+    
     <section id="about" class="about">
         <div class="container">
-  
           <div class="row justify-content-between">
             <div class="col-lg-5 d-flex align-items-center justify-content-center about-img">
               <img src="assets/img/about-img.svg" class="img-fluid" alt="" data-aos="zoom-in">
@@ -173,7 +270,6 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Template Main JS File -->
-<<<<<<< Updated upstream
   <script src="assets/js/main.js"></script>  
   <script>
     function logout() {
@@ -181,7 +277,6 @@
       window.location.href = "./index.html"
     }
   </script>
-=======
   <script src="/assets/js/main.js"></script>  
   
   <!-- Google JS files
@@ -189,7 +284,6 @@
   <script src="https://apis.google.com/js/client.js"></script> -->
   <script src="https://apis.google.com/js/api.js"></script>
 
->>>>>>> Stashed changes
   <script>
     async function completeCourse(){
       
@@ -215,62 +309,6 @@
         } catch (err) {
             console.log(err)
         }
-    }
-
-    function start() {
-      // 2. Initialize the JavaScript client library.
-      gapi.client.init({
-        'apiKey': 'AIzaSyB7GiOzwEVV3OmgoS_LKSGeBUPgAtJDygg',
-        // clientId and scope are optional if auth is not required.
-        'clientId': 'seb-855@tech-series-2021.iam.gserviceaccount.com',
-        'scope': 'profile',
-      }).then(function() {
-        // 3. Initialize and make the API request.
-        return gapi.client.request({
-          'path': 'https://translation.googleapis.com/language/translate/v2',
-        })
-      }).then(function(response) {
-        console.log(response.result);
-      }, function(reason) {
-        console.log('Error: ' + reason.result.error.message);
-      });
-    };
-    // 1. Load the JavaScript client library.
-    gapi.load('client', start);
-
-    function translates(){
-      // Calling Google Translate API
-      const data = document.getElementsByClassName('translate')
-
-      fetch("https://translation.googleapis.com/language/translate/v2", {
-          method: 'post',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: {
-            "q": JSON.stringify(data),
-            "target": zh
-          }
-      }).then(response => response.json()).then(function (data) {
-        alert('Success:', data);  
-        // for (let voucher of data.Items) {
-          //     $('#display').append(`<div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          //                             <div class="portfolio-wrap">
-          //                                 <img src=${voucher.imgSrc} class="img-fluid" alt="">
-          //                                 <div class="portfolio-info p-5">
-          //                                     <h4 id="voucherName-${voucher.voucherID}">${voucher.voucherName}</h4>
-          //                                     <p id="voucherBrand-${voucher.voucherID}">${voucher.voucherBrand}</p>
-          //                                     <p><span id="costPrice-${voucher.voucherID}">${voucher.costPrice}</span> Coins!</p>
-          //                                     <p class="d-none" id="voucherID-${voucher.voucherID}">${voucher.voucherID}</p>
-          //                                     <button class="btn btn-dark mt-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="generateQRCode('${voucher.voucherID}')">Claim</button>
-                                              
-          //                                 </div>
-                                          
-          //                             </div>
-          //                         </div>`)
-      }).catch(function (error) {
-          console.log(error)
-      })
     }
     
   </script>
