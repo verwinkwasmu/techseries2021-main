@@ -97,8 +97,8 @@
               <img src="assets/img/about-img.svg" class="img-fluid" alt="" data-aos="zoom-in">
             </div>
             <div class="col-lg-6 pt-5 pt-lg-0">
-              <h3 data-aos="fade-up">What is budgeting?</h3>
-              <p data-aos="fade-up" data-aos-delay="100">
+              <h3 data-aos="fade-up" class='translate'>What is budgeting?</h3>
+              <p data-aos="fade-up" data-aos-delay="100" class='translate'>
                 A budget is an estimation of revenue and expenses over a specified future period of
              time and is usually compiled and re-evaluated on a periodic basis. Budgets can be made for a person, a group of people, a business, 
             a government, or just about anything else that makes and spends money.
@@ -106,17 +106,17 @@
               <div class="row">
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
                   <!-- <i class="bx bx-receipt"></i> -->
-                  <h4>Why Budget?</h4>
-                  <p>o manage your monthly expenses, prepare for life's unpredictable events, and
+                  <h4 class='translate'>Why Budget?</h4>
+                  <p class='translate'>o manage your monthly expenses, prepare for life's unpredictable events, and
                     be able to afford big-ticket items without going into debt, budgeting is important. Keeping track of how much you earn and spend doesn't have to be drudgery, doesn't require you to be good at math, and doesn't mean you can't buy the things you want. It just means that you'll know where your money goes, you'll have greater control over your finances.</p>
                 </div>
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                   <!-- <i class="bx bx-cube-alt"></i> -->
-                  <h4>Sales Budget</h4>
-                  <p>The sales budget is often the first to be developed, as subsequent expense budgets cannot be established without knowing future cash flows. Budgets are developed for all the different subsidiaries, divisions, and departments within an organization. For a manufacturer, a separate budget is often developed for direct materials, labor, and overhead.</p>
+                  <h4 class='translate'>Sales Budget</h4>
+                  <p class='translate'>The sales budget is often the first to be developed, as subsequent expense budgets cannot be established without knowing future cash flows. Budgets are developed for all the different subsidiaries, divisions, and departments within an organization. For a manufacturer, a separate budget is often developed for direct materials, labor, and overhead.</p>
                 </div>
                 <h3 data-aos="fade-up">Static Vs. Flexible Budgets</h3>
-              <p data-aos="fade-up" data-aos-delay="100">
+              <p data-aos="fade-up" data-aos-delay="100" class='translate'>
                 There are two major types of budgets: static budgets and flexible budgets. 
                 A static budget remains unchanged over the life of the budget. 
                 Regardless of changes that occur during the budgeting period, all accounts and 
@@ -127,8 +127,8 @@
                  process, while a flexible budget provides deeper insight into business 
                  operations.
               </p>
-              <h3 data-aos="fade-up">Beautiful Budgeting</h3>
-              <p data-aos="fade-up" data-aos-delay="100">
+              <h3 data-aos="fade-up" class='translate'>Beautiful Budgeting</h3>
+              <p data-aos="fade-up" data-aos-delay="100" class='translate'>
                 Individuals and families can have budgets, too. Creating 
                 and using a budget is not just for those who need to closely monitor their cash flows from month to month because "money is tight." Almost everyone—even people with large paychecks
                  and plenty of money in the bank—can benefit from budgeting.
@@ -173,6 +173,7 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
 
   <!-- Template Main JS File -->
+<<<<<<< Updated upstream
   <script src="assets/js/main.js"></script>  
   <script>
     function logout() {
@@ -180,6 +181,15 @@
       window.location.href = "./index.html"
     }
   </script>
+=======
+  <script src="/assets/js/main.js"></script>  
+  
+  <!-- Google JS files
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/client.js"></script> -->
+  <script src="https://apis.google.com/js/api.js"></script>
+
+>>>>>>> Stashed changes
   <script>
     async function completeCourse(){
       
@@ -206,6 +216,63 @@
             console.log(err)
         }
     }
+
+    function start() {
+      // 2. Initialize the JavaScript client library.
+      gapi.client.init({
+        'apiKey': 'AIzaSyB7GiOzwEVV3OmgoS_LKSGeBUPgAtJDygg',
+        // clientId and scope are optional if auth is not required.
+        'clientId': 'seb-855@tech-series-2021.iam.gserviceaccount.com',
+        'scope': 'profile',
+      }).then(function() {
+        // 3. Initialize and make the API request.
+        return gapi.client.request({
+          'path': 'https://translation.googleapis.com/language/translate/v2',
+        })
+      }).then(function(response) {
+        console.log(response.result);
+      }, function(reason) {
+        console.log('Error: ' + reason.result.error.message);
+      });
+    };
+    // 1. Load the JavaScript client library.
+    gapi.load('client', start);
+
+    function translates(){
+      // Calling Google Translate API
+      const data = document.getElementsByClassName('translate')
+
+      fetch("https://translation.googleapis.com/language/translate/v2", {
+          method: 'post',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: {
+            "q": JSON.stringify(data),
+            "target": zh
+          }
+      }).then(response => response.json()).then(function (data) {
+        alert('Success:', data);  
+        // for (let voucher of data.Items) {
+          //     $('#display').append(`<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+          //                             <div class="portfolio-wrap">
+          //                                 <img src=${voucher.imgSrc} class="img-fluid" alt="">
+          //                                 <div class="portfolio-info p-5">
+          //                                     <h4 id="voucherName-${voucher.voucherID}">${voucher.voucherName}</h4>
+          //                                     <p id="voucherBrand-${voucher.voucherID}">${voucher.voucherBrand}</p>
+          //                                     <p><span id="costPrice-${voucher.voucherID}">${voucher.costPrice}</span> Coins!</p>
+          //                                     <p class="d-none" id="voucherID-${voucher.voucherID}">${voucher.voucherID}</p>
+          //                                     <button class="btn btn-dark mt-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="generateQRCode('${voucher.voucherID}')">Claim</button>
+                                              
+          //                                 </div>
+                                          
+          //                             </div>
+          //                         </div>`)
+      }).catch(function (error) {
+          console.log(error)
+      })
+    }
+    
   </script>
 
 </body>
