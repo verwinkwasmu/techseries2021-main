@@ -40,35 +40,33 @@
     crossorigin="anonymous"></script>
   
     <script type="text/javascript">
-      
-      var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://google-translate1.p.rapidapi.com/language/translate/v2",
-      "method": "POST",
-      "headers": {
-        "x-rapidapi-host": "google-translate1.p.rapidapi.com",
-        "x-rapidapi-key": "f0a518fc42msh57b9230f5371d27p1b7ef1jsnfe85f5cd373a",
-        "content-type": "application/x-www-form-urlencoded"
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://google-translate1.p.rapidapi.com/language/translate/v2",
+        "method": "POST",
+        "headers": {
+          "x-rapidapi-host": "google-translate1.p.rapidapi.com",
+          "x-rapidapi-key": "f0a518fc42msh57b9230f5371d27p1b7ef1jsnfe85f5cd373a",
+          "content-type": "application/x-www-form-urlencoded"
       },
       "data": {
-        "source": "en",
-        "q": "Contact Form | Name | Contact Number | Email",
-        "target": ""
+          "source": "en",
+          "q": "",
+          "target": ""
       }
-      
-    }
+    }  
     $(document).ready(function(){
-        $(".dropdown-item").click(function(e){
+      $(".dropdown-item").click(function(e){
           if($(this).attr("tolang") != 'en'){
             settings.data.target = $(this).attr("tolang");
-            
+            settings.data.q = reload();
             fetchTranslation();
             $('button').html($(this).html());
           } else {
             updatePlaceholders(settings.data.q);
             $('#langSel').html("Translate to");
-          }  
+          }
         });
     });
     function fetchTranslation(){
@@ -83,8 +81,8 @@
     }
     function updatePlaceholders(updateString){
       var comp = updateString.split('|')
-      $('form > input').each(function(idx){
-        $(this).prop("placeholder", comp[idx+1].trim() );
+      $("[name*='translate']").each(function(idx){
+       $(this).html(comp[idx+1]);
       });
       $("#formHeading").html(comp[0]);
     }
@@ -142,21 +140,9 @@
             <h2 id="storeID">Gogoacademy</h2>
             <p id="eduID">Budgeting</p>
           </div>
-  
- <!-- start of sample lesson  -->
- <!-- End Hero -->
-
-  <main id="main">
-
-    <!-- Test -->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-          
-        </div>
-        <div class="col-sm">
-            <div class="btn-group dropright translate">
-          <button id="langSel" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="col-sm">
+            <div class="btn-group dropright">
+          <button id="langSel" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Translate to
           </button>
           <div class="dropdown-menu translate-option">
@@ -167,23 +153,11 @@
             <a class="dropdown-item" href="#" tolang="zh">Chinese</a>
           </div>
         </div>
-        <h1 id="formHeading">
-            Contact Form
-        </h1>
-        <div>
-          <form action="">
-            <input type="text" name="name" class="formStyle" placeholder="Name" required />
-            <input type="text" name="email" class="formStyle" placeholder="Contact No." required />
-            <input type="email" name="email" class="formStyle" placeholder="Email" required />
-          </form>
-        </div>
-        </div>
-        <div class="col-sm">
-          
-        </div>
-      </div>
-    </div>
-    <!-- End Test -->
+  
+ <!-- start of sample lesson  -->
+ <!-- End Hero -->
+
+  <main id="main">
 
     <!-- ======= Sample Lesson ======= -->
     
@@ -194,8 +168,8 @@
               <img src="assets/img/about-img.svg" class="img-fluid" alt="" data-aos="zoom-in">
             </div>
             <div class="col-lg-6 pt-5 pt-lg-0">
-              <h3 data-aos="fade-up" class='translate'>What is budgeting?</h3>
-              <p data-aos="fade-up" data-aos-delay="100" class='translate'>
+              <h3 data-aos="fade-up" name='translate' id="formHeading">What is budgeting?</h3>
+              <p data-aos="fade-up" data-aos-delay="100" name='translate'>
                 A budget is an estimation of revenue and expenses over a specified future period of
              time and is usually compiled and re-evaluated on a periodic basis. Budgets can be made for a person, a group of people, a business, 
             a government, or just about anything else that makes and spends money.
@@ -203,17 +177,17 @@
               <div class="row">
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
                   <!-- <i class="bx bx-receipt"></i> -->
-                  <h4 class='translate'>Why Budget?</h4>
-                  <p class='translate'>o manage your monthly expenses, prepare for life's unpredictable events, and
+                  <h4 name='translate'>Why Budget?</h4>
+                  <p name='translate'>To manage your monthly expenses, prepare for life's unpredictable events, and
                     be able to afford big-ticket items without going into debt, budgeting is important. Keeping track of how much you earn and spend doesn't have to be drudgery, doesn't require you to be good at math, and doesn't mean you can't buy the things you want. It just means that you'll know where your money goes, you'll have greater control over your finances.</p>
                 </div>
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                   <!-- <i class="bx bx-cube-alt"></i> -->
-                  <h4 class='translate'>Sales Budget</h4>
-                  <p class='translate'>The sales budget is often the first to be developed, as subsequent expense budgets cannot be established without knowing future cash flows. Budgets are developed for all the different subsidiaries, divisions, and departments within an organization. For a manufacturer, a separate budget is often developed for direct materials, labor, and overhead.</p>
+                  <h4 name='translate'>Sales Budget</h4>
+                  <p name='translate'>The sales budget is often the first to be developed, as subsequent expense budgets cannot be established without knowing future cash flows. Budgets are developed for all the different subsidiaries, divisions, and departments within an organization. For a manufacturer, a separate budget is often developed for direct materials, labor, and overhead.</p>
                 </div>
-                <h3 data-aos="fade-up">Static Vs. Flexible Budgets</h3>
-              <p data-aos="fade-up" data-aos-delay="100" class='translate'>
+                <h3 data-aos="fade-up" name='translate'>Static Vs. Flexible Budgets</h3>
+              <p data-aos="fade-up" data-aos-delay="100" name='translate'>
                 There are two major types of budgets: static budgets and flexible budgets. 
                 A static budget remains unchanged over the life of the budget. 
                 Regardless of changes that occur during the budgeting period, all accounts and 
@@ -224,8 +198,8 @@
                  process, while a flexible budget provides deeper insight into business 
                  operations.
               </p>
-              <h3 data-aos="fade-up" class='translate'>Beautiful Budgeting</h3>
-              <p data-aos="fade-up" data-aos-delay="100" class='translate'>
+              <h3 data-aos="fade-up" name='translate'>Beautiful Budgeting</h3>
+              <p data-aos="fade-up" data-aos-delay="100" name='translate'>
                 Individuals and families can have budgets, too. Creating 
                 and using a budget is not just for those who need to closely monitor their cash flows from month to month because "money is tight." Almost everyone—even people with large paychecks
                  and plenty of money in the bank—can benefit from budgeting.
@@ -284,6 +258,19 @@
   <script src="https://apis.google.com/js/api.js"></script>
 
   <script>
+    function reload() {
+      var toTranslate = document.getElementsByName('translate');
+      var result = ""
+      Array.from(toTranslate).forEach(function (element) {
+        if (element == toTranslate[0]) {
+          result = element.textContent + "|";
+        } else {
+          result += "|" + element.textContent  
+        }
+      });
+      return result;
+    }
+
     async function completeCourse(){
       
       let json_file = {
