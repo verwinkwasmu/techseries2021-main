@@ -23,3 +23,11 @@ GoGo is a web application that aims to address the issue of financial inclusion 
 - Tracking
   - Track contributions made
 
+# Login details
+## Business
+- b1@gmail.com, admin123
+- b2@gmail.com, admin123
+
+## Crowdfunder
+- c1@gmail.com, admin123
+- c2@gmail.com, admin123
