@@ -30,7 +30,7 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="../qrcode.min.js"></script>
+    <script src="qrcode.min.js"></script>
   </head>
 
 <body>
@@ -274,7 +274,7 @@
       }
       try {
           const response = await fetch('https://kkanrk8ag7.execute-api.us-east-1.amazonaws.com/dev', {
-              method: 'PUT',
+              method: 'POST',
               headers: { "Content-Type": "application/json" }, body: JSON.stringify(json_file)
           });
           const result = await response.json()
