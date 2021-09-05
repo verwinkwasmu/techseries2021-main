@@ -1,4 +1,5 @@
 # Ellipsis Tech Series Hackathon 2021
+### View our website: https://main.d2d8rs9uu5npza.amplifyapp.com/
 ## Team GoGo
 - verwinkwasmu
 - nicwongg
